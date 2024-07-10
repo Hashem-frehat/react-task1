@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const navbarStyle = {
   paddingLeft: "95px",
@@ -35,15 +36,9 @@ function Navbar() {
     <nav style={navbarStyle}>
       <div style={logoStyle}>MyApp</div>
       <div style={linksStyle}>
-        <a href="#home" style={linkStyle}>
-          Home
-        </a>
-        <a href="#about" style={linkStyle}>
-          About
-        </a>
-        <a href="#contact" style={linkStyle}>
-          Contact
-        </a>
+        <Link to="/contactus">contactus</Link>
+        <Link to="/about">Aboutus</Link>
+        <Link to="/signup">signup</Link>
       </div>
     </nav>
   );

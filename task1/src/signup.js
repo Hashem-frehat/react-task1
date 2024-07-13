@@ -63,7 +63,7 @@ const Signup = () => {
     existingUsers.push(newUser);
 
     localStorage.setItem("signup-form", JSON.stringify(existingUsers));
-
+    
     setUsername("");
     setEmail("");
     setPassword("");

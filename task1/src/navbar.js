@@ -1,5 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { json, Link, Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const navbarStyle = {
   paddingLeft: "95px",
@@ -30,15 +31,26 @@ const linkStyle = {
   fontWeight: "bold",
   marginLeft: "15px",
 };
-
 function Navbar() {
+  const navigate = useNavigate();
+  const b = localStorage.getItem("signup-form") !== null;
+  function Handlelogout() {
+    localStorage.removeItem("signup-form");
+    navigate("/");
+  }
   return (
     <nav style={navbarStyle}>
       <div style={logoStyle}>MyApp</div>
       <div style={linksStyle}>
         <Link to="/contactus">contactus</Link>
         <Link to="/about">Aboutus</Link>
-        <Link to="/signup">signup</Link>
+        {b ? (
+          <button onClick={Handlelogout}>Logout</button>
+        ) : (
+          <Link to="/signup">signup</Link>
+        )}
+
+        <Link to="/home">home</Link>
       </div>
     </nav>
   );

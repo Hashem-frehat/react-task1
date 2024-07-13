@@ -17,7 +17,9 @@ function App() {
           <Route path="about" element={<Aboutus />} />
           <Route path="contactus" element={<Contactus />} />
           <Route path="signup" element={<Signup />} />
+          <Route path="/" element={<Main />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </>
   );

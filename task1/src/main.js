@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import initState from "./json";
 import { ref, set, push, get, update } from "firebase/database";
 import { database } from "./firebase";
-
+import "./index.css";
 const heroStyle = {
   display: "flex",
   flexDirection: "column",
@@ -36,15 +36,15 @@ function Main() {
   const [editId, setEditId] = useState(null);
   const [editValue, setEditValue] = useState("");
 
-  useEffect(() => {
-    const writedata = function () {
-      initState.books.forEach((ele) => {
-        const newDataRef = ref(database, `books/${ele.id}`);
-        set(newDataRef, ele);
-      });
-    };
-    writedata();
-  }, []); //القوسين الفارغين [] في النهاية تعني أن useEffect سيتم تشغيله مرة واحدة فقط عند تحميل المكون.
+  // useEffect(() => {
+  //   const writedata = function () {
+  //     initState.books.forEach((ele) => {
+  //       const newDataRef = ref(database, `books/${ele.id}`);
+  //       set(newDataRef, ele);
+  //     });
+  //   };
+  //   writedata();
+  // }, []); //القوسين الفارغين [] في النهاية تعني أن useEffect سيتم تشغيله مرة واحدة فقط عند تحميل المكون.
   useEffect(() => {
     const datafetch = async () => {
       const dbref = ref(database, "books");
@@ -133,46 +133,65 @@ function Main() {
   }
 
   return (
-    <div>
+    <div className="container mx-auto p-4 ">
       {alldata.map((ele, index) => (
-        <section key={index} style={heroStyle}>
-          <h1>{ele.title}</h1>
-          <p>{ele.author}</p>
-          <p>{ele.isbn}</p>
-          <button onClick={() => editcards(ele.id)}>Edit</button>
-          <button onClick={() => handleDelete(ele.id)}>Delete</button>
+        <section
+          key={index}
+          className="flex flex-row justify-center items-center text-center width-200px p-8 bg-gray-100 text-gray-800 my-2"
+        >
+          <h1 className="text-2xl font-bold">{ele.title}</h1>
+          <p className="text-lg">{ele.author}</p>
+          <p className="text-md">{ele.isbn}</p>
+          <button
+            className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
+            onClick={() => editcards(ele.id)}
+          >
+            Edit
+          </button>
+          <button
+            className="bg-red-500 text-white px-4 py-2 rounded mt-4 ml-2"
+            onClick={() => handleDelete(ele.id)}
+          >
+            Delete
+          </button>
         </section>
       ))}
 
-      <form onSubmit={handleSubmit}>
-        <label>
+      <form onSubmit={handleSubmit} className="flex flex-col space-y-4 mt-8">
+        <label className="flex flex-col">
           Title:
           <input
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
+            className="p-2 border border-gray-300 rounded"
           />
         </label>
-        <label>
+        <label className="flex flex-col">
           Author:
           <input
             type="text"
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
             required
+            className="p-2 border border-gray-300 rounded"
           />
         </label>
-        <label>
+        <label className="flex flex-col">
           ISBN:
           <input
             type="text"
             value={isbn}
             onChange={(e) => setIsbn(e.target.value)}
             required
+            className="p-2 border border-gray-300 rounded"
           />
         </label>
-        <button style={buttonStyle} type="submit">
+        <button
+          className="bg-green-500 text-white px-6 py-3 rounded mt-4"
+          type="submit"
+        >
           Add Book
         </button>
       </form>
